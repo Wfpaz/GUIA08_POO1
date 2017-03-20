@@ -42,73 +42,75 @@ public class JugadoresServ extends HttpServlet {
         }else {
             String CRUD = request.getParameter("btnJuga");
             
-            if ("Guardar".equals(CRUD)) {
-                Jugadores obje = new Jugadores();
-                //obje.setCodiEquipo(Integer.parseInt(request.getParameter("codi")));
-                obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
-                obje.setNomJugador(request.getParameter("nom-juga"));
-                obje.setEdad(Integer.getInteger(request.getParameter("edad")));
-                obje.setAltura(Double.parseDouble(request.getParameter("altu")));
-                obje.setPeso(Double.parseDouble(request.getParameter("peso")));
-
-                if (new JugadoresCtrl().guardar(obje)) {
-                    mens = "Datos guardados";
-                } else {
-                    mens = "Error al guardar";
-                }
-                
-            } else if ("Consultar".equals(CRUD)) {
-                
-                int codigo = Integer.parseInt(request.getParameter("codiJugaRadio").isEmpty() ? "-1" : request.getParameter("codiEquiRadio"));
-                Jugadores obje = new JugadoresCtrl().consUno(codigo);
-                if (obje != null) {
-                    request.setAttribute("codi-juga", obje.getCodJugador());
-                    request.setAttribute("codi-equi", obje.getCodEquipo());
-                    request.setAttribute("nom-juga", obje.getNomJugador());
-                    request.setAttribute("edad", obje.getNomJugador());
-                    request.setAttribute("altu", obje.getAltura());
-                    request.setAttribute("peso", obje.getPeso());
-                    request.setAttribute("estModi", "true");
-                } else {
-                    mens = "Error al consultar";
-                }
-                
-            } else if("Nuevo".equals(CRUD)) { 
-                request.setAttribute("codi-juga", "");
+            if (null != CRUD) switch (CRUD) {
+                case "Guardar":{
+                    Jugadores obje = new Jugadores();
+                    //obje.setCodiEquipo(Integer.parseInt(request.getParameter("codi")));
+                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
+                    obje.setNomJugador(request.getParameter("nom-juga"));
+                    obje.setEdad(Integer.parseInt(request.getParameter("edad")));
+                    obje.setAltura(Double.parseDouble(request.getParameter("altu")));
+                    obje.setPeso(Double.parseDouble(request.getParameter("peso")));
+                    if (new JugadoresCtrl().guardar(obje)) {
+                        mens = "Datos guardados";
+                    } else {
+                        mens = "Error al guardar";
+                    }       break;
+                    }
+                case "Consultar":{
+                    int codigo;
+                    codigo = Integer.parseInt(request.getParameter("codiJugaRadio").isEmpty() ? "-1" : request.getParameter("codiEquiRadio"));
+                    Jugadores obje = new JugadoresCtrl().consUno(codigo);
+                    if (obje != null) {
+                        request.setAttribute("codi-juga", obje.getCodJugador());
+                        request.setAttribute("codi-equi", obje.getCodEquipo());
+                        request.setAttribute("nom-juga", obje.getNomJugador());
+                        request.setAttribute("edad", obje.getNomJugador());
+                        request.setAttribute("altu", obje.getAltura());
+                        request.setAttribute("peso", obje.getPeso());
+                        request.setAttribute("estModi", "true");
+                    } else {
+                        mens = "Error al consultar";
+                    }       break;
+                    }
+                case "Nuevo":
+                    request.setAttribute("codi-juga", "");
                     request.setAttribute("codi-equi", "");
                     request.setAttribute("nom-juga", "");
                     request.setAttribute("edad", "");
                     request.setAttribute("altu", "");
-                    request.setAttribute("peso", ""); 
-                
-            } else if("Eliminar".equals(CRUD)) {
-                Jugadores obje = new Jugadores(); 
-                obje.setCodJugador(Integer.parseInt(request.getParameter("codi")));
-                obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
-                obje.setNomJugador(request.getParameter("nom-juga"));
-                obje.setEdad(Integer.getInteger(request.getParameter("edad")));
-                obje.setAltura(Double.parseDouble(request.getParameter("altu")));
-                obje.setPeso(Double.parseDouble(request.getParameter("peso")));
-
-                if (new JugadoresCtrl().eliminar(obje)) {
-                    mens = "Datos eliminados";
-                } else {
-                    mens = "Error al eliminar";
-                } 
-            } else if("Modificar".equals(CRUD)) {
-                Jugadores obje = new Jugadores(); 
-                obje.setCodJugador(Integer.parseInt(request.getParameter("codi")));
-                obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
-                obje.setNomJugador(request.getParameter("nom-juga"));
-                obje.setEdad(Integer.getInteger(request.getParameter("edad")));
-                obje.setAltura(Double.parseDouble(request.getParameter("altu")));
-                obje.setPeso(Double.parseDouble(request.getParameter("peso")));
-
-                if (new JugadoresCtrl().modificar(obje)) {
-                    mens = "Datos modificados";
-                } else {
-                    mens = "Error al modificar";
-                } 
+                    request.setAttribute("peso", "");
+                    break;
+                case "Eliminar":{
+                    Jugadores obje = new Jugadores();
+                    obje.setCodJugador(Integer.parseInt(request.getParameter("codi")));
+                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
+                    obje.setNomJugador(request.getParameter("nom-juga"));
+                    obje.setEdad(Integer.getInteger(request.getParameter("edad")));
+                    obje.setAltura(Double.parseDouble(request.getParameter("altu")));
+                    obje.setPeso(Double.parseDouble(request.getParameter("peso")));
+                    if (new JugadoresCtrl().eliminar(obje)) {
+                        mens = "Datos eliminados";
+                    } else {
+                        mens = "Error al eliminar";
+                    }       break;
+                    }
+                case "Modificar":{
+                    Jugadores obje = new Jugadores();
+                    obje.setCodJugador(Integer.parseInt(request.getParameter("codi")));
+                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
+                    obje.setNomJugador(request.getParameter("nom-juga"));
+                    obje.setEdad(Integer.getInteger(request.getParameter("edad")));
+                    obje.setAltura(Double.parseDouble(request.getParameter("altu")));
+                    obje.setPeso(Double.parseDouble(request.getParameter("peso")));
+                    if (new JugadoresCtrl().modificar(obje)) {
+                        mens = "Datos modificados";
+                    } else {
+                        mens = "Error al modificar";
+                    }       break;
+                    } 
+                default:
+                    break;
             }
             request.setAttribute("mensAlert", mens);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
