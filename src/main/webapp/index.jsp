@@ -80,8 +80,8 @@
                     <input type="text" name="codi-equi" id="codi-equi" value="${nomb}" placeholder="Equipo"><br>
                     <input type="text" name="nom-juga" id="nom-juga" value="${desc}" placeholder="Nombre"><br>
                     <input type="number" max="99" min="0" name="edad" id="edad" value="${codi}" placeholder="Edad"><br>
-                    <input type="number" min="0" name="altu" id="altu" value="${nomb}" placeholder="Altura"><br>
-                    <input type="number" min="0" name="peso" id="peso" value="${desc}" placeholder="Peso"><br>
+                    <input type="number" step="any" min="0" name="altu" id="altu" value="${nomb}" placeholder="Altura"><br>
+                    <input type="number" step="any" min="0" name="peso" id="peso" value="${desc}" placeholder="Peso"><br>
                     <input type="submit" class="btn btn-default" name="btnJuga" value="<%=nombBtn%>"/> 
                     <input type="submit" class="btn btn-primary" style="<%=clssEditBtn%>" name="btnJuga" value="Modificar"/> 
                     <input type="submit" class="btn btn-danger" style="<%=clssEditBtn%>" name="btnJuga" value="Eliminar"/> 
