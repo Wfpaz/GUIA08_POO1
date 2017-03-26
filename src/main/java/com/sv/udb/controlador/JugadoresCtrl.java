@@ -145,16 +145,16 @@ public class JugadoresCtrl {
         Jugadores resp = new Jugadores();
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("Select * from jugadores where codi_juga = ?");
+            PreparedStatement cmd = cn.prepareStatement("SELECT * FROM jugadores WHERE codi_juga = ?");
             cmd.setInt(1, id);
             ResultSet rs = cmd.executeQuery();
             while (rs.next())
             {
-                resp.setCodEquipo(rs.getInt(1));
-                resp.setNomJugador(rs.getString(2));
-                resp.setEdad(rs.getInt(3));
-                resp.setAltura(rs.getDouble(4));
-                resp.setPeso(rs.getDouble(5));
+                resp.setCodEquipo(rs.getInt(2));
+                resp.setNomJugador(rs.getString(3));
+                resp.setEdad(rs.getInt(4));
+                resp.setAltura(rs.getDouble(5));
+                resp.setPeso(rs.getDouble(6));
             }
         } catch (Exception ex) {
             System.err.println("Error: " + ex.getMessage());

@@ -25,12 +25,23 @@
                  %> 
                 <h4>${mensAlert}</h4>
                 <form action="EquiposServ" method="POST" name="Demo" class="col-md-3 col-md-offset-2">
-                    <input type="hidden" name="codi" id="codi" value="${codi}" placeholder="Text input"><br>
-                    <input type="text" name="nomb" id="nomb" value="${nomb}" placeholder="Nombre del equipo"><br>
-                    <input type="text" name="desc" id="desc" value="${desc}" placeholder="Descripción"><br>
-                    <input type="submit" class="btn btn-default" name="btnEqui" value="<%=nombBton%>"/> 
-                    <input type="submit" class="btn btn-primary" style="<%=clssEditBton%>" name="btnEqui" value="Modificar"/> 
-                    <input type="submit" class="btn btn-danger" style="<%=clssEditBton%>" name="btnEqui" value="Eliminar"/> 
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="codi" id="codi" value="${codi}" placeholder="Text input"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="nomb" id="nomb" value="${nomb}" placeholder="Nombre del equipo"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="Descripción"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" class="form-control" name="imag" id="exampleInputFile" value="${imag}"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default" name="btnEqui" value="<%=nombBton%>"/> 
+                        <input type="submit" class="btn btn-primary" style="<%=clssEditBton%>" name="btnEqui" value="Modificar"/> 
+                        <input type="submit" class="btn btn-danger" style="<%=clssEditBton%>" name="btnEqui" value="Eliminar"/>
+                    </div>
                 </form>
 
                 <form action="EquiposServ" method="POST" name="Demo" class="col-md-4">
@@ -67,7 +78,7 @@
             </div>
                         
             <div class="col-md-12 bg-info">
-            <h1 class="bg-primary">Control de jugadores</h1>
+                <h1 class="bg-primary">Control de jugadores</h1>
                 
                 <% 
                     boolean estModi = Boolean.parseBoolean((String)request.getAttribute("estModi")); 
@@ -76,15 +87,30 @@
                  %> 
                 <h4>${mensAlert}</h4>
                 <form action="JugadoresServ" method="POST" name="Demo" class="col-md-3 col-md-offset-2">
-                    <input type="hidden" name="codi-juga" id="codi-juga" value="${codi}" placeholder="Text input"><br>
-                    <input type="text" name="codi-equi" id="codi-equi" value="${nomb}" placeholder="Equipo"><br>
-                    <input type="text" name="nom-juga" id="nom-juga" value="${desc}" placeholder="Nombre"><br>
-                    <input type="text" max="99" min="0" name="edad" id="edad" value="${codi}" placeholder="Edad"><br>
-                    <input type="text" step="any" min="0" name="altu" id="altu" value="${nomb}" placeholder="Altura"><br>
-                    <input type="text" step="any" min="0" name="peso" id="peso" value="${desc}" placeholder="Peso"><br>
+                    <div class="form-group">
+                        <input type="hidden" name="codi_juga" id="codi_juga" value="${codi_juga}" placeholder="Text input"><br>
+                    </div>
+                    <select class="form-control">
+                        <% for (Equipos obj : new EquiposCtrl().consTodo()) { %>
+                        <option value="${codi_equi}" selected="${codi_equi}"><%=obj.getNombEquipo()%></option>
+                        <% } %>
+                    </select><br>
+                    <div class="form-group">
+                        <input type="text" name="nomb_juga" id="nomb_juga" value="${nomb_juga}" placeholder="Nombre"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" max="99" min="0" name="edad" id="edad" value="${edad}" placeholder="Edad"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" step="any" min="0" name="altu" id="altu" value="${altu}" placeholder="Altura"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" step="any" min="0" name="peso" id="peso" value="${peso}" placeholder="Peso"><br>
+                    </div>
                     <input type="submit" class="btn btn-default" name="btnJuga" value="<%=nombBtn%>"/> 
                     <input type="submit" class="btn btn-primary" style="<%=clssEditBtn%>" name="btnJuga" value="Modificar"/> 
                     <input type="submit" class="btn btn-danger" style="<%=clssEditBtn%>" name="btnJuga" value="Eliminar"/> 
+                    <br>.
                 </form>
 
                 <form action="JugadoresServ" method="POST" name="Demo" class="col-md-4">
@@ -103,6 +129,7 @@
 
                             <%
                                 for (Jugadores temp : new JugadoresCtrl().consTodo()) {
+                                    Equipos obj = new EquiposCtrl().consUno(temp.getCodEquipo());
                             %>
 
                             <tr>
@@ -111,7 +138,7 @@
                                 <td><%=temp.getEdad()%></td>
                                 <td><%=temp.getAltura()%></td>
                                 <td><%=temp.getPeso()%></td>
-                                <td><%=temp.getCodEquipo()%></td>
+                                <td><%=obj.getNombEquipo()%></td>
                             </tr>
                             <% } %>
                         </tbody>

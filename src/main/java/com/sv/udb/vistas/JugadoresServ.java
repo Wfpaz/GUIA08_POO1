@@ -45,9 +45,8 @@ public class JugadoresServ extends HttpServlet {
             if (null != CRUD) switch (CRUD) {
                 case "Guardar":{
                     Jugadores obje = new Jugadores();
-                    //obje.setCodiEquipo(Integer.parseInt(request.getParameter("codi")));
-                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
-                    obje.setNomJugador(request.getParameter("nom-juga"));
+                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi_equi")));
+                    obje.setNomJugador(request.getParameter("nom_juga"));
                     obje.setEdad(Integer.parseInt(request.getParameter("edad")));
                     obje.setAltura(Double.parseDouble(request.getParameter("altu")));
                     obje.setPeso(Double.parseDouble(request.getParameter("peso")));
@@ -59,13 +58,14 @@ public class JugadoresServ extends HttpServlet {
                     }
                 case "Consultar":{
                     int codigo;
-                    codigo = Integer.parseInt(request.getParameter("codiJugaRadio").isEmpty() ? "-1" : request.getParameter("codiEquiRadio"));
+                    
+                    codigo = Integer.parseInt(request.getParameter("codiJugaRadio").isEmpty() ? "-1" : request.getParameter("codiJugaRadio"));
                     Jugadores obje = new JugadoresCtrl().consUno(codigo);
                     if (obje != null) {
-                        request.setAttribute("codi-juga", obje.getCodJugador());
-                        request.setAttribute("codi-equi", obje.getCodEquipo());
-                        request.setAttribute("nom-juga", obje.getNomJugador());
-                        request.setAttribute("edad", obje.getNomJugador());
+                        request.setAttribute("codi_juga", obje.getCodJugador());
+                        request.setAttribute("codi_equi", obje.getCodEquipo());
+                        request.setAttribute("nomb_juga", obje.getNomJugador());
+                        request.setAttribute("edad", obje.getEdad());
                         request.setAttribute("altu", obje.getAltura());
                         request.setAttribute("peso", obje.getPeso());
                         request.setAttribute("estModi", "true");
@@ -74,18 +74,18 @@ public class JugadoresServ extends HttpServlet {
                     }       break;
                     }
                 case "Nuevo":
-                    request.setAttribute("codi-juga", "");
-                    request.setAttribute("codi-equi", "");
-                    request.setAttribute("nom-juga", "");
+                    request.setAttribute("codi_juga", "");
+                    request.setAttribute("codi_equi", "");
+                    request.setAttribute("nomb_juga", "");
                     request.setAttribute("edad", "");
                     request.setAttribute("altu", "");
                     request.setAttribute("peso", "");
                     break;
                 case "Eliminar":{
                     Jugadores obje = new Jugadores();
-                    obje.setCodJugador(Integer.parseInt(request.getParameter("codi")));
-                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
-                    obje.setNomJugador(request.getParameter("nom-juga"));
+                    obje.setCodJugador(Integer.parseInt(request.getParameter("codi_juga")));
+                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi_equi")));
+                    obje.setNomJugador(request.getParameter("nomb_juga"));
                     obje.setEdad(Integer.getInteger(request.getParameter("edad")));
                     obje.setAltura(Double.parseDouble(request.getParameter("altu")));
                     obje.setPeso(Double.parseDouble(request.getParameter("peso")));
@@ -97,9 +97,9 @@ public class JugadoresServ extends HttpServlet {
                     }
                 case "Modificar":{
                     Jugadores obje = new Jugadores();
-                    obje.setCodJugador(Integer.parseInt(request.getParameter("codi")));
-                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi-equi")));
-                    obje.setNomJugador(request.getParameter("nom-juga"));
+                    obje.setCodJugador(Integer.parseInt(request.getParameter("codi_juga")));
+                    obje.setCodEquipo(Integer.valueOf(request.getParameter("codi_equi")));
+                    obje.setNomJugador(request.getParameter("nomb_juga"));
                     obje.setEdad(Integer.getInteger(request.getParameter("edad")));
                     obje.setAltura(Double.parseDouble(request.getParameter("altu")));
                     obje.setPeso(Double.parseDouble(request.getParameter("peso")));
