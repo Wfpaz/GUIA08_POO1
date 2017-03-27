@@ -22,8 +22,8 @@ import javax.servlet.http.Part;
  *
  * @author Walter
  */
-@MultipartConfig
 @WebServlet(name = "EquiposServ", urlPatterns = {"/EquiposServ"})
+@MultipartConfig
 public class EquiposServ extends HttpServlet {
 
     /**
