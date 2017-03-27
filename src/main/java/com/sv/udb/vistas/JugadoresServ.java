@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -40,6 +41,12 @@ public class JugadoresServ extends HttpServlet {
         if (!esValido) {
             response.sendRedirect(request.getContextPath() + "/index.jsp");
         }else {
+            String ruta,nombre;
+            int img = 0;
+            if (img == 0) {
+                
+            }
+            
             String CRUD = request.getParameter("btnJuga");
             
             if (null != CRUD) switch (CRUD) {
@@ -50,6 +57,9 @@ public class JugadoresServ extends HttpServlet {
                     obje.setEdad(Integer.parseInt(request.getParameter("edad")));
                     obje.setAltura(Double.parseDouble(request.getParameter("altu")));
                     obje.setPeso(Double.parseDouble(request.getParameter("peso")));
+                    
+                    
+                    
                     if (new JugadoresCtrl().guardar(obje)) {
                         mens = "Datos guardados";
                     } else {

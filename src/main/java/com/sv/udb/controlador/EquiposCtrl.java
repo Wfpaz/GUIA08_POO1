@@ -7,6 +7,8 @@ package com.sv.udb.controlador;
 
 import com.sv.udb.modelo.Equipos;
 import com.sv.udb.recursos.Conexion;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,9 +26,10 @@ public class EquiposCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("INSERT INTO equipos VALUES(NULL,?,?)");
+            PreparedStatement cmd = cn.prepareStatement("INSERT INTO equipos VALUES(NULL,?,?,?)");
             cmd.setString(1, Obje.getNombEquipo());
             cmd.setString(2, Obje.getDescEquipo());
+            cmd.setString(3, String.valueOf(Obje.getImagen()));
             cmd.executeUpdate();
             resp = true;
         } catch (Exception e) {

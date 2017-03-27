@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>GUIA08_POO1</name>
+    <name>GUIA09_POO1</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

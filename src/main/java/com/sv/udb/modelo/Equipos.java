@@ -5,6 +5,8 @@
  */
 package com.sv.udb.modelo;
 
+import java.awt.Image;
+
 /**
  *
  * @author Walter
@@ -12,6 +14,7 @@ package com.sv.udb.modelo;
 public class Equipos {
     private int codiEquipos;
     private String nombEquipo, descEquipo;
+    byte[] imagen;
 
     public Equipos() {
     }
@@ -44,6 +47,14 @@ public class Equipos {
 
     public void setDescEquipo(String descEquipo) {
         this.descEquipo = descEquipo;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     @Override

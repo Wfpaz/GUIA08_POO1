@@ -5,6 +5,8 @@
  */
 package com.sv.udb.modelo;
 
+import java.awt.Image;
+
 /**
  *
  * @author Walter
@@ -12,7 +14,8 @@ package com.sv.udb.modelo;
 public class Jugadores {
     private int codJugador, codEquipo, edad;
     private double altura, peso;
-    private String nomJugador;
+    private String nomJugador, nombImag;
+    private Image imag;
 
     public Jugadores() {
     }
@@ -72,6 +75,22 @@ public class Jugadores {
 
     public void setNomJugador(String nomJugador) {
         this.nomJugador = nomJugador;
+    }
+
+    public String getNombImag() {
+        return nombImag;
+    }
+
+    public void setNombImag(String nombImag) {
+        this.nombImag = nombImag;
+    }
+
+    public Image getImag() {
+        return imag;
+    }
+
+    public void setImag(Image imag) {
+        this.imag = imag;
     }
 
     @Override

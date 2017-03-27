@@ -35,7 +35,7 @@
                         <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="Descripción"><br>
                     </div>
                     <div class="form-group">
-                        <input type="file" class="form-control" name="imag" id="exampleInputFile" value="${imag}"><br>
+                        <input type="file" class="form-control" name="logo" id="logo" value="${imag}"><br>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-default" name="btnEqui" value="<%=nombBton%>"/> 
