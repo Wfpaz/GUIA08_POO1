@@ -7,6 +7,7 @@ package com.sv.udb.vistas;
 
 import com.sv.udb.controlador.JugadoresCtrl;
 import com.sv.udb.modelo.Jugadores;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -58,7 +59,19 @@ public class JugadoresServ extends HttpServlet {
                     obje.setAltura(Double.parseDouble(request.getParameter("altu")));
                     obje.setPeso(Double.parseDouble(request.getParameter("peso")));
                     
-                    
+                    byte[] foto = null;
+                final Part filePart = request.getPart("img");
+                int tamaFoto = (int)filePart.getSize();
+                if (filePart != null) {
+                    foto = new byte[tamaFoto];
+                    try(DataInputStream imagen = new DataInputStream(filePart.getInputStream())) {
+                        imagen.readFully(foto);
+                    }
+                }
+                
+                if (tamaFoto > 0) {
+                    obje.setImag(foto);
+                }
                     
                     if (new JugadoresCtrl().guardar(obje)) {
                         mens = "Datos guardados";

@@ -23,12 +23,13 @@ public class JugadoresCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("INSERT INTO jugadores VALUES (NULL, ?, ?, ?, ?, ?)");
+            PreparedStatement cmd = cn.prepareStatement("INSERT INTO jugadores VALUES (NULL, ?, ?, ?, ?, ?, ?)");
             cmd.setString(1, String.valueOf(Obje.getCodEquipo()));
             cmd.setString(2, Obje.getNomJugador());
             cmd.setString(3, String.valueOf(Obje.getEdad()));
             cmd.setString(4, String.valueOf(Obje.getAltura()));
             cmd.setString(5, String.valueOf(Obje.getPeso()));
+            cmd.setString(6, String.valueOf(Obje.getImag()));
             
             cmd.executeUpdate();
             resp = true;
@@ -58,7 +59,7 @@ public class JugadoresCtrl {
             ResultSet rs = cmd.executeQuery();
             while(rs.next())
             {
-                resp.add(new Jugadores(rs.getInt(1),rs.getInt(2),rs.getInt(4),rs.getDouble(5),rs.getDouble(6),rs.getString(3)));
+                resp.add(new Jugadores(rs.getInt(1),rs.getInt(2),rs.getInt(4),rs.getDouble(5),rs.getDouble(6),rs.getString(3),rs.getBytes(7)));
                             //Jugadores(int codJugador, int codEquipo, int edad, double altura, double peso, String nomJugador)
             }
         }
@@ -115,13 +116,14 @@ public class JugadoresCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("UPDATE jugadores SET codi_equi=?, nomb_juga=?, edad_juga=?, altu_juga=?, peso_juga=? WHERE codi_juga = ?");
+            PreparedStatement cmd = cn.prepareStatement("UPDATE jugadores SET codi_equi=?, nomb_juga=?, edad_juga=?, altu_juga=?, peso_juga=?, foto_juga=? WHERE codi_juga = ?");
             cmd.setString(1, String.valueOf(obje.getCodEquipo()));
             cmd.setString(2, obje.getNomJugador());
             cmd.setString(3, String.valueOf(obje.getEdad()));
             cmd.setString(4, String.valueOf(obje.getAltura()));
             cmd.setString(5, String.valueOf(obje.getPeso()));
-            cmd.setString(6, String.valueOf(obje.getCodJugador()));
+            cmd.setString(6, String.valueOf(obje.getImag()));
+            cmd.setString(7, String.valueOf(obje.getCodJugador()));
             cmd.executeUpdate();
             resp = true;
         } catch (Exception e) {
@@ -155,6 +157,7 @@ public class JugadoresCtrl {
                 resp.setEdad(rs.getInt(4));
                 resp.setAltura(rs.getDouble(5));
                 resp.setPeso(rs.getDouble(6));
+                resp.setImag(rs.getBytes(7));
             }
         } catch (Exception ex) {
             System.err.println("Error: " + ex.getMessage());

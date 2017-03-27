@@ -14,19 +14,20 @@ import java.awt.Image;
 public class Jugadores {
     private int codJugador, codEquipo, edad;
     private double altura, peso;
-    private String nomJugador, nombImag;
-    private Image imag;
+    private String nomJugador;
+    private byte[] imag;
 
     public Jugadores() {
     }
 
-    public Jugadores(int codJugador, int codEquipo, int edad, double altura, double peso, String nomJugador) {
+    public Jugadores(int codJugador, int codEquipo, int edad, double altura, double peso, String nomJugador, byte[] imag) {
         this.codJugador = codJugador;
         this.codEquipo = codEquipo;
         this.edad = edad;
         this.altura = altura;
         this.peso = peso;
         this.nomJugador = nomJugador;
+        this.imag = imag;
     }
 
     public int getCodJugador() {
@@ -77,19 +78,11 @@ public class Jugadores {
         this.nomJugador = nomJugador;
     }
 
-    public String getNombImag() {
-        return nombImag;
-    }
-
-    public void setNombImag(String nombImag) {
-        this.nombImag = nombImag;
-    }
-
-    public Image getImag() {
+    public byte[] getImag() {
         return imag;
     }
 
-    public void setImag(Image imag) {
+    public void setImag(byte[] imag) {
         this.imag = imag;
     }
 

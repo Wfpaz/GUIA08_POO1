@@ -24,18 +24,18 @@
                     String clssEditBton = estaModi ? "" : "display: none"; //Pra ocultar botones 
                  %> 
                 <h4>${mensAlert}</h4>
-                <form action="EquiposServ" method="POST" name="Demo" class="col-md-3 col-md-offset-2">
+                <form action="EquiposServ" method="POST" name="Demo" class="col-md-3 col-md-offset-2" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="hidden" class="form-control" name="codi" id="codi" value="${codi}" placeholder="Text input"><br>
+                        <input type="hidden" class="form-control" name="codi" id="codi" value="${codi}" placeholder="Text input" required><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nomb" id="nomb" value="${nomb}" placeholder="Nombre del equipo"><br>
+                        <input type="text" class="form-control" name="nomb" id="nomb" value="${nomb}" placeholder="Nombre del equipo" required><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="Descripción"><br>
+                        <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="Descripción" required><br>
                     </div>
                     <div class="form-group">
-                        <input type="file" class="form-control" name="logo" id="logo" value="${imag}"><br>
+                        <input type="file" name="img" id="img"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-default" name="btnEqui" value="<%=nombBton%>"/> 

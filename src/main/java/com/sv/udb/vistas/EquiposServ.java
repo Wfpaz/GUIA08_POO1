@@ -5,11 +5,18 @@
  */
 package com.sv.udb.vistas;
 
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import com.sv.udb.controlador.EquiposCtrl;
 import com.sv.udb.modelo.Equipos;
 import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import static jdk.nashorn.internal.objects.NativeError.getFileName;
 
 /**
  *
@@ -51,8 +59,9 @@ public class EquiposServ extends HttpServlet {
                 //obje.setCodiEquipo(Integer.parseInt(request.getParameter("codi")));
                 obje.setNombEquipo(request.getParameter("nomb"));
                 obje.setDescEquipo(request.getParameter("desc"));
-                byte[] foto = null;                
-                final Part filePart = request.getPart("logo");
+
+                byte[] foto = null;
+                final Part filePart = request.getPart("img");
                 int tamaFoto = (int)filePart.getSize();
                 if (filePart != null) {
                     foto = new byte[tamaFoto];

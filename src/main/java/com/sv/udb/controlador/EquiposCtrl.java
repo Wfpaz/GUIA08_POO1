@@ -58,7 +58,7 @@ public class EquiposCtrl {
             ResultSet rs = cmd.executeQuery();
             while(rs.next())
             {
-                resp.add(new Equipos(rs.getInt(1),rs.getString(2),rs.getString(3)));
+                resp.add(new Equipos(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getBytes(4)));
             }
         }
         catch(Exception err)
@@ -114,10 +114,11 @@ public class EquiposCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("UPDATE equipos SET nomb_equi = ?, desc_equi = ? WHERE codi_equi = ?");
+            PreparedStatement cmd = cn.prepareStatement("UPDATE equipos SET nomb_equi = ?, desc_equi = ?, logo_equi=? WHERE codi_equi = ?");
             cmd.setString(1, obje.getNombEquipo());
             cmd.setString(2, obje.getDescEquipo());
-            cmd.setString(3, String.valueOf(obje.getCodiEquipos()));
+            cmd.setString(3, String.valueOf(obje.getImagen()));
+            cmd.setString(4, String.valueOf(obje.getCodiEquipos()));
             cmd.executeUpdate();
             resp = true;
         } catch (Exception e) {
@@ -149,6 +150,7 @@ public class EquiposCtrl {
                 resp.setCodiEquipo(rs.getInt(1));
                 resp.setNombEquipo(rs.getString(2));
                 resp.setDescEquipo(rs.getString(3));
+                resp.setImagen(rs.getBytes(4));
             }
         } catch (Exception ex) {
             System.err.println("Error: " + ex.getMessage());

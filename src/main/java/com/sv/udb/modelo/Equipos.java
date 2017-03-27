@@ -19,10 +19,11 @@ public class Equipos {
     public Equipos() {
     }
 
-    public Equipos(int codiEquipo, String nombEquipo, String descEquipo) {
-        this.codiEquipos = codiEquipo;
+    public Equipos(int codiEquipos, String nombEquipo, String descEquipo, byte[] imagen) {
+        this.codiEquipos = codiEquipos;
         this.nombEquipo = nombEquipo;
         this.descEquipo = descEquipo;
+        this.imagen = imagen;
     }
 
     public int getCodiEquipos() {
