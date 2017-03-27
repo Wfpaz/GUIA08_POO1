@@ -66,7 +66,7 @@
                                 <td><input type="radio" name="codiEquiRadio" value="<%=temp.getCodiEquipos() %>"></td>
                                 <td><%=temp.getNombEquipo()%></td>
                                 <td><%=temp.getDescEquipo()%></td>
-                                <td><img src="data:image/*;base64,<%=bphoto%>" class="materialboxed" width="100" height="100"></td>
+                                <td><img src="data:image/*;base64,<%=bphoto%>" class="materialboxed" width="50" height="50"></td>
                             </tr>
                             <% } %>
                         </tbody>
