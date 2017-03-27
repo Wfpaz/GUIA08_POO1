@@ -1,3 +1,4 @@
+<%@page import="java.util.Base64"%>
 <%@page import="com.sv.udb.controlador.JugadoresCtrl"%>
 <%@page import="com.sv.udb.modelo.Jugadores"%>
 <!DOCTYPE HTML>
@@ -35,7 +36,7 @@
                         <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="Descripción" required><br>
                     </div>
                     <div class="form-group">
-                        <input type="file" name="img" id="img"/>
+                        <input type="file" name="img" id="img" />
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-default" name="btnEqui" value="<%=nombBton%>"/> 
@@ -57,12 +58,15 @@
 
                             <%
                                 for (Equipos temp : new EquiposCtrl().consTodo()) {
+                                    byte[] photo = temp.getImagen();
+                                    String bphoto = Base64.getEncoder().encodeToString(photo);
                             %>
 
                             <tr>
                                 <td><input type="radio" name="codiEquiRadio" value="<%=temp.getCodiEquipos() %>"></td>
                                 <td><%=temp.getNombEquipo()%></td>
                                 <td><%=temp.getDescEquipo()%></td>
+                                <td><img src="data:image/*;base64,<%=bphoto%>" class="materialboxed" width="100" height="100"></td>
                             </tr>
                             <% } %>
                         </tbody>

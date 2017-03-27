@@ -8,6 +8,7 @@ package com.sv.udb.vistas;
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import com.sv.udb.controlador.EquiposCtrl;
 import com.sv.udb.modelo.Equipos;
+import java.awt.Image;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
