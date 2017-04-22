@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sv.udb</groupId>
-    <artifactId>GUIA08_POO1</artifactId>
+    <artifactId>GUIA08_POO1-JSTL</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -44,7 +44,12 @@
             <artifactId>displaytag</artifactId>
             <version>1.2</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
