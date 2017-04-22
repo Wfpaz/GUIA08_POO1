@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sv.udb</groupId>
-    <artifactId>GUIA08_POO1</artifactId>
+    <artifactId>GUIA08_POO1-DT</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>GUIA08_POO1</name>
+    <name>GUIA08_POO1-DT</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -38,6 +38,13 @@
                 </exclusion> 
             </exclusions> 
         </dependency> 
+        <!-- https://mvnrepository.com/artifact/displaytag/displaytag -->
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

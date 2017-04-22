@@ -4,6 +4,7 @@
 <%@page import="com.sv.udb.controlador.EquiposCtrl"%>
 <%@page import="com.sv.udb.modelo.Equipos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,91 +34,18 @@
                     <input type="submit" class="btn btn-danger" style="<%=clssEditBton%>" name="btnEqui" value="Eliminar"/> 
                 </form>
 
-                <form action="EquiposServ" method="POST" name="Demo" class="col-md-4">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>Cons</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <%
-                                for (Equipos temp : new EquiposCtrl().consTodo()) {
-                            %>
-
-                            <tr>
-                                <td><input type="radio" name="codiEquiRadio" value="<%=temp.getCodiEquipos() %>"></td>
-                                <td><%=temp.getNombEquipo()%></td>
-                                <td><%=temp.getDescEquipo()%></td>
-                            </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-                    <input type="submit" value="Consultar" name="btnEqui"/>
-                </form>
+                    <% request.setAttribute( "test", new EquiposCtrl().consTodo()); %>
+                    <display:table name="test" id="test" pagesize="5" export="true">
+                        <display:column property="codiEquipos" title="ID" sortable="true" sortName="codiEquipos"/>
+                        <display:column property="nombEquipo" title="Nombre equipo" sortable="true" sortName="nombEquipo"/>
+                        <display:column property="descEquipo" title="Descripcion" sortable="true" sortName="descEquipo"/>
+                    </display:table>
             </div>
                         
             <div class="bg-default">
                 <br/>
                 <br/>
                 <br/>
-            </div>
-                        
-            <div class="col-md-12 bg-info">
-            <h1 class="bg-primary">Control de jugadores</h1>
-                
-                <% 
-                    boolean estModi = Boolean.parseBoolean((String)request.getAttribute("estModi")); 
-                    String nombBtn = estModi ? "Nuevo" : "Guardar"; // Para el texto del botón 
-                    String clssEditBtn = estModi ? "" : "display: none"; //Pra ocultar botones 
-                 %> 
-                <h4>${mensAlert}</h4>
-                <form action="JugadoresServ" method="POST" name="Demo" class="col-md-3 col-md-offset-2">
-                    <input type="hidden" name="codi-juga" id="codi-juga" value="${codi}" placeholder="Text input"><br>
-                    <input type="text" name="codi-equi" id="codi-equi" value="${nomb}" placeholder="Equipo"><br>
-                    <input type="text" name="nom-juga" id="nom-juga" value="${desc}" placeholder="Nombre"><br>
-                    <input type="number" max="99" min="0" name="edad" id="edad" value="${codi}" placeholder="Edad"><br>
-                    <input type="number" step="any" min="0" name="altu" id="altu" value="${nomb}" placeholder="Altura"><br>
-                    <input type="number" step="any" min="0" name="peso" id="peso" value="${desc}" placeholder="Peso"><br>
-                    <input type="submit" class="btn btn-default" name="btnJuga" value="<%=nombBtn%>"/> 
-                    <input type="submit" class="btn btn-primary" style="<%=clssEditBtn%>" name="btnJuga" value="Modificar"/> 
-                    <input type="submit" class="btn btn-danger" style="<%=clssEditBtn%>" name="btnJuga" value="Eliminar"/> 
-                </form>
-
-                <form action="JugadoresServ" method="POST" name="Demo" class="col-md-4">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>Cons </th>
-                                <th>Nombre </th>
-                                <th>Edad </th>
-                                <th>Altura </th>
-                                <th>Peso </th>
-                                <th>Equipo </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <%
-                                for (Jugadores temp : new JugadoresCtrl().consTodo()) {
-                            %>
-
-                            <tr>
-                                <td><input type="radio" name="codiJugaRadio" value="<%=temp.getCodJugador()%>"></td>
-                                <td><%=temp.getNomJugador()%></td>
-                                <td><%=temp.getEdad()%></td>
-                                <td><%=temp.getAltura()%></td>
-                                <td><%=temp.getPeso()%></td>
-                                <td><%=temp.getCodEquipo()%></td>
-                            </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-                    <input type="submit" value="Consultar" name="btnJuga"/>
-                </form>
             </div>
         </div>
         
