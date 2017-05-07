@@ -1,12 +1,18 @@
 <%@page import="java.util.Base64"%>
 <%@page import="com.sv.udb.controlador.JugadoresCtrl"%>
 <%@page import="com.sv.udb.modelo.Jugadores"%>
-<!DOCTYPE HTML>
 <%@page import="com.sv.udb.controlador.EquiposCtrl"%>
 <%@page import="com.sv.udb.modelo.Equipos"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<%-- language maneja el idioma actual --%>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.sv.udb.bundle.file"/>
+
+<!DOCTYPE HTML>
+
 <html>
     
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,9 +22,25 @@
         <title>GUIA08</title>
     
     <body>
+        <div class="bg-default">
+            <div class="bg-info">
+                <form>
+                    <select id="language" name="language" onchange="submit();">
+                        <option value="es_ES" 
+                            <c:if test="${language=='es_ES'}">selected</c:if>>
+                            <fmt:message key="label.español" />
+                        </option>
+                        <option value="en_US" 
+                            <c:if test="${language=='en_US'}">selected</c:if>>
+                            <fmt:message key="label.ingles" />
+                       </option>
+                    </select>
+                </form>
+            </div>
+        </div>
         <div>
             <div class="col-md-12 bg-success">
-            <h1 class="bg-primary">Control de Equipos</h1>
+            <h1 class="bg-primary"><fmt:message key="lblEquipos"/></h1>
                 <% 
                     boolean estaModi = Boolean.parseBoolean((String)request.getAttribute("estaModi")); 
                     String nombBton = estaModi ? "Nuevo" : "Guardar"; // Para el texto del botón 
@@ -30,18 +52,18 @@
                         <input type="hidden" class="form-control" name="codi" id="codi" value="${codi}" placeholder="Text input" required><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nomb" id="nomb" value="${nomb}" placeholder="Nombre del equipo" required><br>
+                        <input type="text" class="form-control" name="nomb" id="nomb" value="${nomb}" placeholder="<fmt:message key="lblEquipo"/>" required><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="Descripción" required><br>
+                        <input type="text" class="form-control" name="desc" id="desc" value="${desc}" placeholder="<fmt:message key='txtDescripcion'/>" required><br>
                     </div>
                     <div class="form-group">
                         <input type="file" name="img" id="img" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-default" name="btnEqui" value="<%=nombBton%>"/> 
-                        <input type="submit" class="btn btn-primary" style="<%=clssEditBton%>" name="btnEqui" value="Modificar"/> 
-                        <input type="submit" class="btn btn-danger" style="<%=clssEditBton%>" name="btnEqui" value="Eliminar"/>
+                        <input type="submit" class="btn btn-default" name="btnEqui" value="<fmt:message key="btnGuardar"/>"/> 
+                        <input type="submit" class="btn btn-primary" style="<%=clssEditBton%>" name="btnEqui" value="<fmt:message key="btnGuardar"/>"/>
+                        <input type="submit" class="btn btn-danger" style="<%=clssEditBton%>" name="btnEqui" value="<fmt:message key="btnEliminar"/>"/>
                     </div>
                 </form>
 
@@ -49,9 +71,10 @@
                     <table border="1">
                         <thead>
                             <tr>
-                                <th>Cons</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
+                                <th><fmt:message key="lblCodigo"/></th>
+                                <th><fmt:message key="lblEquipo"/></th>
+                                <th><fmt:message key="txtDescripcion"/></th>
+                                <th><fmt:message key="thFoto"/></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +94,7 @@
                             <% } %>
                         </tbody>
                     </table>
-                    <input type="submit" value="Consultar" name="btnEqui"/>
+                    <input type="submit" name="btnEqui" value="<fmt:message key="btnConsultar"/>"/>
                 </form>
             </div>
                         
@@ -82,7 +105,7 @@
             </div>
                         
             <div class="col-md-12 bg-info">
-                <h1 class="bg-primary">Control de jugadores</h1>
+                <h1 class="bg-primary"><fmt:message key="lblJugadores"/></h1>
                 
                 <% 
                     boolean estModi = Boolean.parseBoolean((String)request.getAttribute("estModi")); 
@@ -100,20 +123,21 @@
                         <% } %>
                     </select><br>
                     <div class="form-group">
-                        <input type="text" name="nomb_juga" id="nomb_juga" value="${nomb_juga}" placeholder="Nombre"><br>
+                        <input type="text" name="nomb_juga" id="nomb_juga" value="${nomb_juga}" placeholder="<fmt:message key="lblNombres"/>"><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" max="99" min="0" name="edad" id="edad" value="${edad}" placeholder="Edad"><br>
+                        <input type="text" max="99" min="0" name="edad" id="edad" value="${edad}" placeholder="<fmt:message key="lblEdad"/>"><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" step="any" min="0" name="altu" id="altu" value="${altu}" placeholder="Altura"><br>
+                        <input type="text" step="any" min="0" name="altu" id="altu" value="${altu}" placeholder="<fmt:message key="lblAltura"/>"><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" step="any" min="0" name="peso" id="peso" value="${peso}" placeholder="Peso"><br>
+                        <input type="text" step="any" min="0" name="peso" id="peso" value="${peso}" placeholder="<fmt:message key="lblPeso"/>"><br>
                     </div>
-                    <input type="submit" class="btn btn-default" name="btnJuga" value="<%=nombBtn%>"/> 
-                    <input type="submit" class="btn btn-primary" style="<%=clssEditBtn%>" name="btnJuga" value="Modificar"/> 
-                    <input type="submit" class="btn btn-danger" style="<%=clssEditBtn%>" name="btnJuga" value="Eliminar"/> 
+                    <!-- input type="submit" class="btn btn-default" name="btnJuga" value="< %=nombBtn%>"/--> 
+                        <input type="submit" class="btn btn-default" name="btnEqui" value="<fmt:message key="btnGuardar"/>"/> 
+                        <input type="submit" class="btn btn-primary" style="<%=clssEditBton%>" name="btnEqui" value="<fmt:message key="btnGuardar"/>"/>
+                        <input type="submit" class="btn btn-danger" style="<%=clssEditBton%>" name="btnEqui" value="<fmt:message key="btnEliminar"/>"/>
                     <br>.
                 </form>
 
@@ -121,12 +145,12 @@
                     <table border="1">
                         <thead>
                             <tr>
-                                <th>Cons </th>
-                                <th>Nombre </th>
-                                <th>Edad </th>
-                                <th>Altura </th>
-                                <th>Peso </th>
-                                <th>Equipo </th>
+                                <th><fmt:message key="lblCodigo"/> </th>
+                                <th><fmt:message key="lblNombres"/> </th>
+                                <th><fmt:message key="lblEdad"/> </th>
+                                <th><fmt:message key="lblAltura"/> </th>
+                                <th><fmt:message key="lblPeso"/> </th>
+                                <th><fmt:message key="lblEquipo"/> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,7 +171,7 @@
                             <% } %>
                         </tbody>
                     </table>
-                    <input type="submit" value="Consultar" name="btnJuga"/>
+                    <input type="submit"name="btnJuga" value="<fmt:message key="btnConsultar"/>"/>
                 </form>
             </div>
         </div>
